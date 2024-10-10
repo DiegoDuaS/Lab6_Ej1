@@ -1,0 +1,15 @@
+{
+    "states": ["q0", "q1", "q2"],
+    "input_alphabet": ["0", "1"],
+    "stack_alphabet": ["X", "Z0"],
+    "initial_state": "q0",
+    "initial_stack_symbol": "Z0",
+    "transitions": {
+      "(q0, 0, Z0)": ["q0", "XXZ0"],
+      "(q0, 0, X)": ["q0", "XX"],
+      "(q0, 1, X)": ["q1", "%"],
+      "(q1, 1, X)": ["q1", "%"],
+      "(q1, ε, Z0)": ["q2", "Z0"]
+    },
+    "final_states": ["q2"]
+  }
