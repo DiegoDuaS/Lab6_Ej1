@@ -13,7 +13,7 @@ current_state = automaton["initial_state"]
 stack.push(automaton["initial_stack_symbol"])
 
 # Simulación de la entrada
-input_string = "0011"  # Cadena de entrada a procesar
+input_string = "011"  # Cadena de entrada a procesar
 input_index = 0
 
 # Función para realizar transiciones
@@ -24,9 +24,16 @@ def make_transition(state, symbol, stack_symbol):
     else:
         return None
 
+print(f"Input inicial:{input_string}\n")
+print(f"Pila: {stack}")
 # Procesar la entrada paso a paso
-while input_index < len(input_string):
-    current_symbol = input_string[input_index]
+while input_index <= len(input_string):
+    
+    if input_index < len(input_string):
+        current_symbol = input_string[input_index]  # Símbolo actual de la cadena de entrada
+    else:
+        current_symbol = ""
+        
     top_stack = stack.peek()
     
     # Verificar si hay una transición para el estado actual, símbolo de entrada y símbolo de pila
@@ -36,7 +43,8 @@ while input_index < len(input_string):
         # Aplicar la transición
         
         new_state, new_stack_symbols = transition
-        print(f"Transición: ({current_state}, {current_symbol}, {top_stack}) -> ({new_state}, {new_stack_symbols})")
+        print(f"\nTransición: ({current_state}, {current_symbol}, {top_stack}) -> ({new_state}, {new_stack_symbols})")
+        
         
         # Actualizar el estado
         current_state = new_state
@@ -56,12 +64,13 @@ while input_index < len(input_string):
         
         # Avanzar en la cadena de entrada
         input_index += 1
+        print(f"Pila: {stack}")
     else:
-        print(f"No hay transición definida para ({current_state}, {current_symbol}, {top_stack})")
+        print(f"\nNo hay transición definida para ({current_state}, {current_symbol}, {top_stack})")
         break
 
 # Verificar si llegamos a un estado final
 if current_state in automaton["final_states"]:
-    print(f"Cadena aceptada en el estado {current_state}")
+    print(f"\nCadena aceptada en el estado {current_state}")
 else:
-    print(f"Cadena no aceptada. Estado final: {current_state}")
+    print(f"\nCadena no aceptada. Estado final: {current_state}")
